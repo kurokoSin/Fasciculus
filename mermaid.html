@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja" class="h-100">
+<head>
+  <title>Mermaid</title>
+
+  <!-- custom me -->
+  <script src="./wwwroot/js/parts.js"></script>
+
+  <!-- BootStrap -->
+  <link rel="stylesheet" href="./wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" />
+  <script src="./wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Mermaid -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.4.0/mermaid.min.js" integrity="sha512-BudIsnV3kKODHjsLF8hfIcVW7XXhCW66WYqP9Q7LANbzL4Gfm8TSMB+Yv/llYsVON6wuntE35kLlpEmCaQcI6w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</head>
+<body class="m-3 h-100" onload="loadMemo()">
+  <header>
+    <h1>Mermaid</h1>
+  </header>
+  <main class="h-100">
+    <div class="d-flex w-100">
+        <textarea class="h-75 col-6" id="input" cols="30" rows="10"></textarea>
+        <div id="view" class="h-75 col-6">
+    </div>
+  </main>
+  <footer></footer>
+  <script type="module" >
+    const input   = document.getElementById("input");
+    const view    = document.getElementById("view");
+   
+    // load 
+    input.value = localStorage.getItem('Mermaid_memo');
+
+    // mermaid
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    const config = { startOnLoad: true };
+    mermaid.initialize(config);
+    console.log('initialize...ok');
+
+
+    const drawMermaid = async () => {
+      let code = decodeHTML(input.value);
+
+      const graphDiv = document.getElementById("graphDiv");
+      if( graphDiv ){
+        graphDiv.remove();
+      }
+      const mermaidItem = document.createElement('pre');
+      mermaidItem.classList = "mermaid";
+      mermaidItem.id = "graphDiv";
+      mermaidItem.innerHTML = code;
+      await view.appendChild(mermaidItem);
+
+      mermaid.run();
+    }
+
+    input.addEventListener('input', async function () {
+      await drawMermaid();
+    });
+
+    input.addEventListener('input', async (e) => {
+      localStorage.setItem('Mermaid_memo', e.target.value);
+    });
+
+  </script>
+</body>
+</html>

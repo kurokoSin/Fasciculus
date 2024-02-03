@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>devbox</title>
+  <link rel="icon" href="./wwwroot/images/favicon.ico" type="image/svg+xml">
+ 
+  <!-- BootStrap -->
+  <link rel="stylesheet" href="./wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" />
+  <script src="./wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="./wwwroot/lib/bootstrap/icons/font/bootstrap-icons.min.css" />
+
+  <!-- My Design -->
+  <link rel="stylesheet" href="./wwwroot/css/site.css" />
+</head>
+<body>
+<div class="container-fluid">
+    <!-- サイドメニュー -->
+    <div class="row flex-nowrap">
+        <div class="col-auto px-0 bg-dark">
+            <div class="d-flex flex-column align-items-center px-2 pt-2 text-white min-vh-100">
+                <span class="fs-5 d-none d-sm-inline">Menu</span>
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center" id="menu">
+                    <li class="nav-item" >
+                      <button class="nav-link align-middle px-0" data-q7-href="memo.html"
+                          data-bs-toggle="tooltip" data-bs-placement="right" data-bs-custom-class="custom-tooltip" data-bs-title="Memo">
+                        <i class="fs-4 bi-journal"></i>
+                      </button>
+                    </li>
+                    <li>
+                      <button class="nav-link px-0 align-middle" data-q7-href="todo.html"
+                          data-bs-toggle="tooltip" data-bs-placement="right" data-bs-custom-class="custom-tooltip" data-bs-title="Todo">
+                        <i class="fs-4 bi-check2-square"></i>
+                      </button>
+                    </li>
+                    <li>
+                      <button class="nav-link px-0 align-middle" data-q7-href="mermaid.html"
+                          data-bs-toggle="tooltip" data-bs-placement="right" data-bs-custom-class="custom-tooltip" data-bs-title="Mermaid">
+                        <i class="fs-4 bi-grid"></i>
+                      </button>
+                    </li>
+                    <li>
+                      <button class="nav-link px-0 align-middle" data-q7-href="xpath.html"
+                          data-bs-toggle="tooltip" data-bs-placement="right" data-bs-custom-class="custom-tooltip" data-bs-title="XPath">
+                        <i class="fs-4 bi-diagram-3"></i>
+                      </button>
+                    </li>
+                </ul>
+                <hr>
+            </div>
+        </div>
+        <!-- メインコンテンツ -->
+        <div class="col">
+          <iframe id="main_content" class="h-100 w-100" src="memo.html"></iframe>
+        </div>
+    </div>
+</div>
+<script>
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+  const main_content = document.getElementById('main_content');
+  // iframe 差し替え
+  function replace_content(url) {
+    main_content.contentWindow.location.replace(url)
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const menu_items = document.querySelectorAll('button[data-q7-href]');
+    menu_items.forEach( (item) => {
+      item.addEventListener('click', () => {
+        replace_content(item.getAttribute('data-q7-href'));
+      });
+    });
+  });
+</script>
+</body>
+</html>

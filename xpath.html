@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja" class="h-100">
+<head>
+  <title>Xpath</title>
+
+  <!-- BootStrap -->
+  <link rel="stylesheet" href="./wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" />
+  <script src="./wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="./wwwroot/lib/bootstrap/icons/font/bootstrap-icons.min.css" />
+
+  <script src="./wwwroot/js/xpath/xpath.js"></script>
+</head>
+<body class="m-3 h-100">
+  <header>
+  </header>
+  <main class="h-100 container">
+    <div class="d-flex flex-row">
+      <h1>XPath Search</h1>
+      <div class="ms-auto">
+        <h2><a target="_blank" href="./wwwroot/assets/xpath/XPath_cheatsheets_v2.pdf"><i class="bi-question-circle"></i></a></h2>
+      </div>
+    </div>
+    <div class="h-75 d-flex flex-row">
+      <div class="col-6 p-1">
+        <!-- Text Area Start -->
+        <textarea id="parse_text" class="form-control h-100 w-100">
+<div>
+    <h1>Example Domain</h1>
+    <p>This domain is for use in illustrative examples in documents. You may use this
+    domain in literature without prior coordination or asking for permission.</p>
+    <p><a href="https://example.com/domains/hogehoge">More information1...</a></p>
+    <p><a href="https://example.com/domains/fugafuga">More information2...</a></p>
+    <p><a href="https://example.com/domains/mofumofu">More information3...</a></p>
+</div>
+        </textarea>
+        <!-- Text Area End -->
+      </div>
+      <div class="col-6 col">
+        <div class="input-group w-100 p-1">
+          <input id="xpath" class="form-control" type="text" value="//p/a" >
+          <button id="exec" class="btn btn-primary">探索</button>
+        </div>
+        <div class="p-1">
+          <ul id="result" class="list-group">
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer></footer>
+  <script>
+    const parse_text = document.getElementById('parse_text');
+    const xpath = document.getElementById('xpath');
+    const exec = document.getElementById('exec');
+    const result = document.getElementById('result');
+
+    const search = () => {
+      // result.childNodes = new Array();  // initialize
+      while (result.firstChild) {
+        result.removeChild(result.firstChild);
+      }
+      let snap_shots = parse(parse_text.value, xpath.value);
+      // let snap;
+      // while( snap = snap_shots.iterateNext() ) {
+      //   let elm = document.createElement('li');
+      //   elm.innerText = snap;
+      //   result.appendChild(elm);
+      // }
+      snap_shots.forEach(snap => {
+        let elm = document.createElement('li');
+        elm.classList.add('list-group-item')
+        elm.innerText = snap.innerText;
+        result.appendChild(elm);
+      });
+      return;
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      search();
+      exec.addEventListener('click', () => { search(); });
+    });
+
+  </script>
+</body>
+</html>

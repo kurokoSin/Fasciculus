@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <title>Todo</title>
+  <link rel="icon" href="./wwwroot/images/favicon.ico" />
+
+  <!-- BootStrap -->
+  <link rel="stylesheet" href="./wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" />
+  <script src="./wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+
+  <!-- project js -->
+  <script src="./wwwroot/js/todo/todo.js" ></script>
+</head>
+<body class="d-flex flex-column p-3" onload="loadMemo(document.getElementById('list'))">
+  <header>
+    <h1>To Do</h1>
+  </header>
+  <main class="text-center">
+    <div class="col-10">
+      <ul id="list"></ul>
+      <button onclick="appendMemo(document.getElementById('list'));" class="col-12 btn btn-primary">&bigoplus; 追加</button>
+    </div>
+  </main>
+  <footer></footer>
+</body>
+</html>
