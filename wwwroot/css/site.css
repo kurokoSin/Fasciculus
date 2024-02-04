@@ -2,3 +2,13 @@
   --bs-tooltip-bg: var(--bd-violet-bg);
   --bs-tooltip-color: var(--bs-white);
 }
+
+ul {
+  list-style-type: none;
+}
+
+/**** COLOR THEME *****/
+* {
+  --q7-color-rezero1 : #796bae;
+  --q7-color-rezero2 : #251b4b;
+}

@@ -6,10 +6,14 @@
 
   <!-- BootStrap -->
   <link rel="stylesheet" href="./wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" />
-  <script src="./wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+  <link rel="stylesheet" href="./wwwroot/lib/bootstrap/icons/font/bootstrap-icons.min.css" />
+  <script src="./wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- project js -->
+  <link rel="stylesheet" href="./wwwroot/css/site.css" />
+  <link rel="stylesheet" href="./wwwroot/css/todo.css" />
   <script src="./wwwroot/js/todo/todo.js" ></script>
+
 </head>
 <body class="d-flex flex-column p-3" onload="loadMemo(document.getElementById('list'))">
   <header>
@@ -17,7 +21,8 @@
   </header>
   <main class="text-center">
     <div class="col-10">
-      <ul id="list"></ul>
+      <ul id="list">
+      </ul>
       <button onclick="appendMemo(document.getElementById('list'));" class="col-12 btn btn-primary">&bigoplus; 追加</button>
     </div>
   </main>

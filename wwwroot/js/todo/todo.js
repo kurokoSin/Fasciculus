@@ -1,7 +1,15 @@
 /* make random id */
-function makeid(length) {
+const json_key = "q7-Fasciculus-Todo";
+const id_len = 7;
+
+let todos = [
+  {"boards" : []},
+  {"tasts"  : []}
+];
+
+const makeid = (length) => {
   let result           = '';
-  const characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const characters     = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   var charactersLength = characters.length;
   for ( var i = 0; i < length; i++ ) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
@@ -11,12 +19,12 @@ function makeid(length) {
 }
 
 /* append */
-function appendMemo(root_ul, id, value) {
+const appendMemo = (root_ul, id, value) => {
   let item = document.createElement("li");
   item.className = "col-12 my-1";
 
   let t = document.createElement("input");
-  t.id = (id === undefined || id === "" ) ? makeid(7) : id;
+  t.id = (id === undefined || id === "" ) ? makeid(id_len) : id;
   t.value = (value === undefined ) ? "" : value;
   t.type = "text";
   t.className = "col-10";
@@ -34,19 +42,19 @@ function appendMemo(root_ul, id, value) {
 }
 
 /* remove */
-function removeMemo(e) {
+const removeMemo = (e) => {
   localStorage.removeItem(e.target.name);
   e.target.parentNode.style.display = "none";
 }
 
 /* save */
-function saveMemo(e) {
+const saveMemo = (e) => {
   localStorage.setItem(e.target.id, e.target.value);
 }
 
 /* load */
-function loadMemo(root_ul) {
-  Object.keys(localStorage).sort().forEach(function(key) {
+const loadMemo = (root_ul) => {
+  Object.keys(localStorage).forEach((key) => {
     appendMemo(root_ul, key, localStorage.getItem(key));
   });
 }
