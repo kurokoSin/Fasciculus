@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja" class="h-100">
+<head>
+  <title>Memo</title>
+
+  <!-- BootStrap -->
+  <link rel="stylesheet" href="./wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" />
+  <script src="./wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="./wwwroot/lib/bootstrap/icons/font/bootstrap-icons.min.css" />
+
+  <!-- -->
+  <link rel="stylesheet" href="./wwwroot/css/rotate_Figure.css" />
+  <script src="./wwwroot/js/rotate_figure/rotate_figure.js"></script>
+</head>
+<body class="m-3 h-100">
+  <header>
+    <h1>RotatingFigure</h1>
+  </header>
+  <main class="h-100">
+    <div class="fig-list w-100 d-flex flex-wrap">
+    </div>
+
+    <div class="figure w-100 d-flex p-5">
+      <div class="w-100 h-100 d-block m-5 text-center">
+        <img class="fig-image" src="./wwwroot/assets/rotate_figure/1b1cdf12a9ecbd6ee6f525d35f4f5f8b.png" style="width: 450px; height: 450px;" />
+      </div>
+    </div>
+
+    <div class="fig-controler d-flex flex-row">
+      <div><button class="fig-play btn btn-primary m-1"><i class="fig-icon col-1 bi-play-fill"></i></button></div>
+      <div><input class="fig-speed my-auto" type="range" min="-100" max="100" value="0"></div>
+      <div><span class="fig-speed-value my-auto">10050</span><small>ms</small>
+    </div>
+  </main>
+  <footer>
+  </footer>
+</body>
+</html>
+

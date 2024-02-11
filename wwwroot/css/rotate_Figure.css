@@ -1,0 +1,13 @@
+.fig-rotate {
+  animation: 10050ms linear infinite rotate_loop_right;
+}
+
+@keyframes rotate_loop_right {
+  from { transform: rotate(0); }
+  to   { transform: rotate(1080deg) }
+}
+
+@keyframes rotate_loop_left {
+  from { transform: rotate(0); }
+  to   { transform: rotate(-1080deg) }
+}
