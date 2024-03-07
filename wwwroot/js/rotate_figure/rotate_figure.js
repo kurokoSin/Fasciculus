@@ -9,6 +9,10 @@ const files = [
   {name: "cbed7a608e6a7c11236a5defba62f86e.png" },
   {name: "13c7cf9a7ed0f10b5cfda67171eb94a8.png" },
   {name: "375b09b214d09ea207640f80b14aa3d8.png" },
+  {name: "3da9ffca7a98f6f1f7b2120910aa5c13.png" },
+  {name: "e581feac347bac3b44e60fc8f4b2a858.png" },
+  {name: "ed5e01d476fb4603f36b966b5a96b1dc.png" },
+  {name: "f95de1afd38a237d25e5f4248968679d.png" },
   {name: "pinterest_01.png" }
 ] 
 
