@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja" class="h-100">
+<head>
+  <title>DEncoder</title>
+
+  <script src="./wwwroot/js/DEncoder/base64.js"></script>
+  <script src="./wwwroot/js/DEncoder/escapeHtml.js"></script>
+
+  <!-- BootStrap -->
+  <link rel="stylesheet" href="./wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" />
+  <script src="./wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="./wwwroot/lib/bootstrap/icons/font/bootstrap-icons.min.css" />
+
+</head>
+<body class="m-3 h-100">
+  <header>
+    <h1>Encoder/Decoder</h1>
+  </header>
+  <main class="h-100">
+    <div class="d-flex flex-column">
+      <div class="col-12">
+        <textarea id="den_text" class="h-75 w-100"></textarea>
+      </div>
+      <div class="d-flex">
+        <div class="col-2"><label><input type="radio" name="den" value="enc" checked>Encode</label></div>
+        <div class="col-2"><label><input type="radio" name="den" value="dec" >Decode</label></div>
+      </div>
+    </div>
+    <div class="mt-3 d-flex flex-column">
+      <div class="mt-2 ps-2 col-6 d-flex flex-row border">
+        <div class="my-auto col-2">HtmlEncode</div>
+        <div id="out_html" class="my-auto col">文字列</div>
+        <button class="q7-clip ms-auto btn" data-q7-target="out_html"><i class="bi bi-clipboard"></i></button>
+      </div>
+      <div class="mt-2 ps-2 col-6 d-flex flex-row border">
+        <div class="my-auto col-2">UrlEncode</div>
+        <div id="out_url" class="my-auto col">文字列</div>
+        <button class="q7-clip ms-auto btn" data-q7-target="out_url"><i class="bi bi-clipboard"></i></button>
+      </div>
+      <div class="mt-2 ps-2 col-6 d-flex flex-row border">
+        <div class="my-auto col-2">Base64</div>
+        <div id="out_base64" class="my-auto col">文字列</div>
+        <button class="q7-clip ms-auto btn" data-q7-target="out_base64"><i class="bi bi-clipboard"></i></button>
+      </div>
+    </div>
+  </main>
+  <footer>
+    目標、<a href="https://dencode.com/ja/string">DenCode</a>
+  </footer>
+  <script>
+    const in_text = document.getElementById('den_text');
+    const out_html = document.getElementById('out_html');
+    const out_url  = document.getElementById('out_url');
+    const out_base64 = document.getElementById('out_base64');
+    document.addEventListener('DOMContentLoaded', () => {
+      in_text.addEventListener('input', () => {
+        const selected_val = document.querySelector('input[name="den"]:checked');
+        
+        switch(selected_val.value) {
+          case "enc" :
+            // Encode
+            out_html.innerText = escapeHTML(in_text.value);
+            out_url.innerText = encodeURI(in_text.value);
+            // out_base64.innerText = base64Encode(in_text.value).toString();
+            base64Encode(in_text.value).then(encoded => { out_base64.innerText = encoded });
+            break;
+
+          case "dec" :
+            // Decode
+            out_html.innerText = unescapeHTML(in_text.value);
+            out_url.innerText = decodeURI(in_text.value);
+            base64Decode(in_text.value).then(decoded => { out_base64.innerText = decoded });
+            break;
+          
+          default: console.log('error pattern: ' + selected_val.value); break;
+        }
+
+      });
+
+      const clipboards = document.querySelectorAll('.q7-clip');
+      clipboards.forEach( clip => {
+        clip.addEventListener('click', () => {
+          let text = document.getElementById(clip.dataset.q7Target).innerText;
+          navigator.clipboard.writeText(text);
+          setTimeout( () => {
+            clip.querySelector('i').classList.add('bi-clipboard-check-fill');
+          }, 1);
+          setTimeout( () => {
+            clip.querySelector('i').classList.remove('bi-clipboard-check-fill');
+          }, 1500);
+        });
+      });
+
+
+    });
+  </script>
+</body>
+</html>
+
