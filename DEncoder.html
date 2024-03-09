@@ -22,8 +22,8 @@
         <textarea id="den_text" class="h-75 w-100"></textarea>
       </div>
       <div class="d-flex">
-        <div class="col-2"><label><input type="radio" name="den" value="enc" checked>Encode</label></div>
-        <div class="col-2"><label><input type="radio" name="den" value="dec" >Decode</label></div>
+        <div class="col-2"><label><input class="me-1" type="radio" name="den" value="enc" checked>Encode</label></div>
+        <div class="col-2"><label><input class="me-1" type="radio" name="den" value="dec" >Decode</label></div>
       </div>
     </div>
     <div class="mt-3 d-flex flex-column">
@@ -52,29 +52,36 @@
     const out_html = document.getElementById('out_html');
     const out_url  = document.getElementById('out_url');
     const out_base64 = document.getElementById('out_base64');
-    document.addEventListener('DOMContentLoaded', () => {
-      in_text.addEventListener('input', () => {
-        const selected_val = document.querySelector('input[name="den"]:checked');
+    const select_item = document.querySelectorAll('input[name="den"]');
+
+    const dencode = () => {
+      const selected_val = document.querySelector('input[name="den"]:checked');
+      
+      switch(selected_val.value) {
+        case "enc" :
+          // Encode
+          out_html.innerText = escapeHTML(in_text.value);
+          out_url.innerText = encodeURI(in_text.value);
+          // out_base64.innerText = base64Encode(in_text.value).toString();
+          base64Encode(in_text.value).then(encoded => { out_base64.innerText = encoded });
+          break;
+
+        case "dec" :
+          // Decode
+          out_html.innerText = unescapeHTML(in_text.value);
+          out_url.innerText = decodeURI(in_text.value);
+          base64Decode(in_text.value).then(decoded => { out_base64.innerText = decoded });
+          break;
         
-        switch(selected_val.value) {
-          case "enc" :
-            // Encode
-            out_html.innerText = escapeHTML(in_text.value);
-            out_url.innerText = encodeURI(in_text.value);
-            // out_base64.innerText = base64Encode(in_text.value).toString();
-            base64Encode(in_text.value).then(encoded => { out_base64.innerText = encoded });
-            break;
+        default: console.log('error pattern: ' + selected_val.value); break;
+      }
+    }
 
-          case "dec" :
-            // Decode
-            out_html.innerText = unescapeHTML(in_text.value);
-            out_url.innerText = decodeURI(in_text.value);
-            base64Decode(in_text.value).then(decoded => { out_base64.innerText = decoded });
-            break;
-          
-          default: console.log('error pattern: ' + selected_val.value); break;
-        }
+    document.addEventListener('DOMContentLoaded', () => {
+      in_text.addEventListener('input', () => { dencode(); });
 
+      select_item.forEach(elm => {
+        elm.addEventListener('change', () => { dencode(); })
       });
 
       const clipboards = document.querySelectorAll('.q7-clip');
