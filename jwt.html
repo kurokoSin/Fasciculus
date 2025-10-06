@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>JWTエディター</title>
+  <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.js" nonce></script>
+  <script src="./wwwroot/js/jwt/enc_dec.js" nonce></script>
+  <link rel="stylesheet" href="./wwwroot/css/jwt.css" nonce>
+
+  <style>
+    textarea {width: 100%; height: 70px; font-family: monospace;}
+    input {width: 100%;}
+    .section {margin-bottom: 1em;}
+  </style>
+</head>
+<body class="bg-white">
+  <h1>JWTエディター</h1>
+  <div class="section">
+    <label>JWT</label>
+    <textarea id="jwt-input" placeholder="header.payload.signature"></textarea>
+    <button onclick="decodeJWT()">デコード</button>
+  </div>
+  <div class="section">
+    <label>Header (JSON)</label>
+    <textarea id="header">{
+  "alg": "HS254",
+  "typ": "JWT"
+}</textarea>
+  </div>
+  <div class="section">
+    <label>Payload (JSON)</label>
+    <textarea id="payload"></textarea>
+  </div>
+  <div class="section">
+    <label>署名用秘密鍵</label>
+    <input type="text" id="secret" placeholder="HS256用のシークレット文字列" />
+    <button onclick="encodeJWT()">エンコード/再署名</button>
+  </div>
+  <div class="section">
+    <label>生成されたJWT</label>
+    <textarea id="jwt-output" readonly></textarea>
+  </div>
+</body>
+</html>
